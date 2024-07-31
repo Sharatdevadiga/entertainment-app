@@ -11,7 +11,8 @@ import {
   glbalErrorHandler,
   unhandledRoutes,
 } from "./controller/errorController.js";
-import bookingRouter from "./routes/bookingRoutes.js";
+import bookingRouter from "./routes/bookmarkRoutes.js";
+import cookieParser from "cookie-parser";
 
 // connect to the mongoDb database
 await connectDB();
@@ -19,6 +20,7 @@ await connectDB();
 // middlewares
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 // Route middlewares
 app.use("/api/user", authRouter);

@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  protect,
   userLogin,
   userLogout,
   userSignup,
@@ -9,6 +10,6 @@ const authRouter = express.Router();
 
 authRouter.post("/signup", userSignup);
 authRouter.post("/login", userLogin);
-authRouter.post("/logout", userLogout);
+authRouter.post("/logout", protect, userLogout);
 
 export default authRouter;

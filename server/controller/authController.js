@@ -27,11 +27,12 @@ async function createSendTokenWithCookie(
     const token = signToken(user._id);
     const cookieOptions = {
       expires: new Date(
-        Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000
+        Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
       secure: true,
     };
+    console.log(cookieOptions.expires);
 
     res.cookie("jwt", token, cookieOptions);
 
@@ -94,7 +95,7 @@ export async function userLogin(req, res, next) {
       return res.status(400).json({
         status: "fail",
         message:
-          "Incorrect email or password. If you donot hav a account, please create one",
+          "Incorrect email or password. If you donot have a account, please create one",
       });
     }
 
@@ -115,7 +116,9 @@ export async function userLogin(req, res, next) {
 export async function userLogout(req, res, next) {
   // replace the existing cookie with an empty cookie
   res.cookie("jwt", "Logged-Out", {
-    expires: new Date(Date.now() + 10 * 1000),
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
     httpOnly: true,
   });
 
@@ -140,12 +143,13 @@ export async function protect(req, res, next) {
   }
 
   // 2. If token was not there then suggest to login
-  if (!token)
+  if (!token) {
     return errorHandler(res, 401, "You must be logged in to access this route");
-
+  }
+  console.log(token);
   // 3. verify the token, find the user and attach user on req object for next middleware
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
     let user = await User.findById(decoded.userId).select("-password");
 
     if (!user) return errorHandler(res, 404, "User no longe exists");

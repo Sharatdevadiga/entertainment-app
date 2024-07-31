@@ -29,7 +29,7 @@ export const imageUrl =
   "https://image.tmdb.org/t/p/w500/1E5baAaEse26fej7uHcjOgEE2t2.jpg";
 
 export const imageUrlOriginal =
-  "https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg";
+  "https://image.tmdb.org/t/p/original/9l1eZiJHmhr5jIlthMdJN5WYoff.jpg";
 
 export const searchCollection =
   "https://api.themoviedb.org/3/search/collection?query=fast%20and%20furious&include_adult=true&language=en-US&page=1";
