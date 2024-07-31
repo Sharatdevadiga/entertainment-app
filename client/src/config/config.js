@@ -21,7 +21,7 @@ export const Movie_details =
   "https://api.themoviedb.org/3/movie/343611?api_key=71ca9d7b191fb64e1be0a9925148e929";
 
 export const append_req =
-  "https://api.themoviedb.org/3/movie/343611?&append_to_response=videos&api_key=71ca9d7b191fb64e1be0a9925148e929";
+  "https://api.themoviedb.org/3/movie/157336?api_key=${API_kEY}&append_to_response=videos,credits";
 
 //   images
 // base_url, a file_size and a file_path.
@@ -30,3 +30,16 @@ export const imageUrl =
 
 export const imageUrlOriginal =
   "https://image.tmdb.org/t/p/original/wwemzKWzjKYJFfCeiB57q3r4Bcm.svg";
+
+export const searchCollection =
+  "https://api.themoviedb.org/3/search/collection?query=fast%20and%20furious&include_adult=true&language=en-US&page=1";
+
+// cast
+export const movieCast =
+  "https://api.themoviedb.org/3/movie/343611/credits?language=en-US";
+
+export const videos =
+  "https://api.themoviedb.org/3/movie/movie_id/videos?language=en-US";
+
+export const providers =
+  "https://api.themoviedb.org/3/movie/{movie_id}/watch/providers";

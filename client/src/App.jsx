@@ -12,7 +12,8 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const url =
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=71ca9d7b191fb64e1be0a9925148e929";
+        // "https://api.themoviedb.org/3/movie/now_playing?api_key=71ca9d7b191fb64e1be0a9925148e929";
+        "https://api.themoviedb.org/3/movie/343611/credits?api_key=71ca9d7b191fb64e1be0a9925148e929&language=en-US";
       const data = await getData(url);
       setData(data);
     };
