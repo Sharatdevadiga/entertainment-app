@@ -11,13 +11,15 @@ export const errorHandler = function (
   message = "operation failed",
   err = null
 ) {
-  console.log("💥💥💥");
-  console.error(err);
-  console.log("💥💥💥");
+  if (err) {
+    console.log("💥💥💥");
+    console.error(err);
+    console.log("💥💥💥");
+  }
 
   res.status(statusCode).json({
     status: "fail",
-    message,
+    message: message || err.message,
   });
 };
 

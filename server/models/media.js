@@ -7,7 +7,7 @@ const mediaSchema = new Schema({
     unique: true,
     required: [true, "Tmdb Id must be specified for a media"],
   },
-  type: {
+  mediaType: {
     type: String,
     enum: ["movie", "tv"],
     required: true,
@@ -27,7 +27,7 @@ const mediaSchema = new Schema({
   },
   releaseDate: Date,
   posterPath: String,
-  voerview: String,
+  overview: String,
 });
 
 const Media = mongoose.model("Media", mediaSchema);

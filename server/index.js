@@ -1,18 +1,21 @@
 /* eslint-disable no-undef */
 import "dotenv/config";
+
 import connectDB from "./config/connect.js";
 import express from "express";
+import cookieParser from "cookie-parser";
 
 import authRouter from "./routes/authRoutes.js";
 import movieRouter from "./routes/movieRoutes.js";
 import searchRouter from "./routes/searchRoutes.js";
 import tvSeriesRouter from "./routes/tvSeriesRoutes.js";
+import bookingRouter from "./routes/bookmarkRoutes.js";
+import userRoute from "./routes/userRoutes.js";
+
 import {
   glbalErrorHandler,
   unhandledRoutes,
 } from "./controller/errorController.js";
-import bookingRouter from "./routes/bookmarkRoutes.js";
-import cookieParser from "cookie-parser";
 
 // connect to the mongoDb database
 await connectDB();
@@ -28,6 +31,7 @@ app.use("/api/movies", movieRouter);
 app.use("/api/tvSeries", tvSeriesRouter);
 app.use("/api/searchMovieOrTv", searchRouter);
 app.use("/api/user/bookmark", bookingRouter);
+app.use("/api/userDetails", userRoute);
 
 // unhandled routes and errors
 app.use("*", unhandledRoutes);

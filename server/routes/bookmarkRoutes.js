@@ -1,8 +1,8 @@
 import express from "express";
 import {
-  addBookmark,
-  deleteBookmark,
-  getBookMarks,
+  addUserBookmark,
+  deleteUserBookmark,
+  getUserBookMarks,
 } from "../controller/bookmarkController.js";
 import { protect } from "../controller/authController.js";
 
@@ -11,12 +11,8 @@ bookingRouter.use(protect);
 
 bookingRouter
   .route("/")
-  .post(addBookmark)
-  .delete(deleteBookmark)
-  .get(getBookMarks);
-
-// bookingRouter.post("/", addBookmark);
-// bookingRouter.delete("/", deleteBookmark);
-// bookingRouter.get("/", getBookMarks);
+  .post(addUserBookmark)
+  .delete(deleteUserBookmark)
+  .get(getUserBookMarks);
 
 export default bookingRouter;
