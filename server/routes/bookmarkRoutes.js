@@ -4,15 +4,15 @@ import {
   deleteUserBookmark,
   getUserBookMarks,
 } from "../controller/bookmarkController.js";
-import { protect } from "../controller/authController.js";
+import { protect } from "../middlewares/JWTVerification.js";
 
-const bookingRouter = express.Router();
-bookingRouter.use(protect);
+const bookmarkRouter = express.Router();
+bookmarkRouter.use(protect);
 
-bookingRouter
+bookmarkRouter
   .route("/")
   .post(addUserBookmark)
   .delete(deleteUserBookmark)
   .get(getUserBookMarks);
 
-export default bookingRouter;
+export default bookmarkRouter;

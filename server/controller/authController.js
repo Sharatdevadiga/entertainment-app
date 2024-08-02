@@ -66,51 +66,34 @@ export async function userSignup(req, res, next) {
       // SIGN AND SEND THE TOKEN IN COOKIE
       const successmessage = "Successfully signed up";
       await createSendTokenWithCookie(newUser, 201, req, res, successmessage);
+      next();
     }
   } catch (err) {
-    res.status(500).json({ status: "fail", message: "Sign up Failed" });
-    console.error(err);
+    errorHandler(res, 500, "Sign up Failed", err);
   }
-  next();
 }
 
 export async function userLogin(req, res, next) {
   try {
     const { email, password } = req.body;
-    console.log(req.body);
 
     //1. IF EMAIL AND PASSWORD ARE NOT THER SEND ERROR
-    if (!email || !password) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Please provide proper email and password",
-      });
-    }
+    if (!email || !password)
+      errorHandler(res, 404, "Please provide proper email and password");
 
     // 2. FIND USER AND VERIFY PASSWORD
     const user = await User.findOne({ email }).select("+password");
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
-    if (!user || !isPasswordCorrect) {
-      return res.status(400).json({
-        status: "fail",
-        message:
-          "Incorrect email or password. If you donot have a account, please create one",
-      });
-    }
+    if (!user || !isPasswordCorrect)
+      errorHandler(res, 404, "Incorrect email/password.");
 
     // 3. IF EVERYTHING IS OK, SING AND SEND THE TOKEN
-    const successmessage = "Successfully logged In";
-    createSendTokenWithCookie(user, 200, req, res, successmessage);
+    createSendTokenWithCookie(user, 200, req, res, "Successfully logged In");
+    next();
   } catch (err) {
-    console.error(err);
-    res.status(400).json({
-      status: "fail",
-      message: "Login faled, please try again",
-    });
+    errorHandler(res, 500, "Login faled, please try again", err);
   }
-
-  next();
 }
 
 export async function userLogout(req, res, next) {
@@ -128,34 +111,4 @@ export async function userLogout(req, res, next) {
     message: "successfully logged out",
   });
   next();
-}
-
-export async function protect(req, res, next) {
-  let token;
-  const headerCondition =
-    req.headers.authorization && req.headers.authorization.startsWith("Bearer");
-
-  // 1. Get the token from cookie or authorization header
-  if (req.cookies.jwt) {
-    token = req.cookies.jwt;
-  } else if (headerCondition) {
-    token = req.headers.authorization.split(" ")[1];
-  }
-
-  // 2. If token was not there then suggest to login
-  if (!token) {
-    return errorHandler(res, 401, "You must be logged in to access this route");
-  }
-  console.log(token);
-  // 3. verify the token, find the user and attach user on req object for next middleware
-  try {
-    const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);
-    let user = await User.findById(decoded.userId).select("-password");
-
-    if (!user) return errorHandler(res, 404, "User no longe exists");
-    req.user = user;
-    next();
-  } catch (err) {
-    return errorHandler(res, 401, "Not authorized! token failed", err);
-  }
 }

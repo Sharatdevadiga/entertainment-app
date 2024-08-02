@@ -1,12 +1,12 @@
 import express from "express";
 import {
-  searchCollection,
+  searchMedia,
   searchMovies,
   searchTvSeries,
 } from "../controller/searchController.js";
 const searchRouter = express.Router();
 
-searchRouter.get("/", searchCollection);
+searchRouter.get("/", searchMedia);
 searchRouter.get("/movie", searchMovies);
 searchRouter.get("/tvSeries", searchTvSeries);
 

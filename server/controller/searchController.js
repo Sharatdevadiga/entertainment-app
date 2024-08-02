@@ -2,12 +2,7 @@
 /* eslint-disable no-undef */
 import fetchFromTmdb from "../utils/fetcher.js";
 import { asyncHandler } from "../utils/handlers.js";
-
-let statusInfo = {
-  successStatusCode: 200,
-  errorMessage: "page not found",
-  errorStatusCode: 404,
-};
+import { defaultStatusInfo } from "../config/defaultStatusInfo.js";
 
 const searchMovieOrTv = async function (req, type = "movie") {
   const encodedQuery = encodeURIComponent(req.body.query);
@@ -21,14 +16,14 @@ const searchMovieOrTv = async function (req, type = "movie") {
 export const searchMovies = asyncHandler(async function (req, res, next) {
   const data = await searchMovieOrTv(req, "movie");
   return data;
-}, statusInfo);
+}, defaultStatusInfo);
 
 export const searchTvSeries = asyncHandler(async function (req, res, next) {
   const data = await searchMovieOrTv(req, "tv");
   return data;
-}, statusInfo);
+}, defaultStatusInfo);
 
-export const searchCollection = asyncHandler(async function (req, res, next) {
+export const searchMedia = asyncHandler(async function (req, res, next) {
   const movieData = await searchMovieOrTv(req, "movie");
   const tvSeriesData = await searchMovieOrTv(req, "tv");
 
@@ -36,4 +31,4 @@ export const searchCollection = asyncHandler(async function (req, res, next) {
     movieData,
     tvSeriesData,
   };
-}, statusInfo);
+}, defaultStatusInfo);

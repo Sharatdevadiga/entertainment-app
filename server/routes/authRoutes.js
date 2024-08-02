@@ -1,10 +1,10 @@
 import express from "express";
 import {
-  protect,
   userLogin,
   userLogout,
   userSignup,
 } from "../controller/authController.js";
+import { protect } from "../middlewares/JWTVerification.js";
 
 const authRouter = express.Router();
 

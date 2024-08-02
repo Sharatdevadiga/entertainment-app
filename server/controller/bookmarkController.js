@@ -47,7 +47,7 @@ export const addUserBookmark = async function (req, res, next) {
     session.endSession();
 
     // 4. SEND SUCCESSRESPONSE AND GOTO NEXT MIDDLEWARE
-    successHandler(res, 200, media);
+    successHandler(res, 201, media);
     next();
   } catch (err) {
     // 5. ON FAILED TRANSACTION ABORT AND END IT
@@ -81,7 +81,7 @@ export const getUserBookMarks = async function (req, res, next) {
       .select("-_id -userId");
 
     if (!userBookmarks || userBookmarks.length === 0) {
-      return errorHandler(res, 404, "User has no bookmarks");
+      return errorHandler(res, 409, "User has no bookmarks");
     }
     successHandler(res, 200, userBookmarks);
     next();

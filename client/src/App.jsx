@@ -1,28 +1,15 @@
-import { useState } from "react";
-import { useEffect } from "react";
-
-async function getData(url) {
-  const res = await fetch(url);
-  const data = await res.json();
-  return data;
-}
+import { Route, Routes } from "react-router-dom";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
-  const [data, setData] = useState();
-  useEffect(() => {
-    const fetchData = async () => {
-      const url =
-        // "https://api.themoviedb.org/3/movie/now_playing?api_key=71ca9d7b191fb64e1be0a9925148e929";
-        "https://api.themoviedb.org/3/movie/343611/credits?api_key=71ca9d7b191fb64e1be0a9925148e929&language=en-US";
-      const data = await getData(url);
-      setData(data);
-    };
-
-    fetchData();
-  }, []);
-
-  console.log(data);
-  return <div>Entertainment app</div>;
+  return (
+    <div>
+      {/* <h1>ENTERTAINMENT APP</h1> */}
+      <Routes>
+        <Route path="signup" element={<SignupPage />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
