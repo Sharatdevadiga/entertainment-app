@@ -34,29 +34,34 @@
   }
 
   .form--auth {
-    @apply xs:w-80 flex w-full flex-col gap-4 rounded-2xl bg-gray p-6 sm:w-96;
+    @apply flex w-full flex-col gap-4 rounded-2xl bg-gray p-6 xs:w-80 sm:w-96;
   }
 }
 
 /* For auto-filled input fields */
-input:-webkit-autofill {
-  background-color: #10141e !important;
-  color: #fff;
+/* Autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: #161d2f !important;
+  color: #eff6ff !important;
+  box-shadow: 0 0 0px #161d2f !important;
+  -webkit-text-fill-color: #eff6ff !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
-/* For Firefox */
-input:-moz-autofill {
-  background-color: #10141e !important;
-  color: #fff;
+input:-moz-autofill,
+input:-moz-autofill:hover,
+input:-moz-autofill:focus,
+input:-moz-autofill:active {
+  background-color: #161d2f !important;
+  color: #eff6ff !important;
+  box-shadow: 0 0 0px 1000px #161d2f inset !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
-/* For other browsers */
 input:-ms-input-placeholder {
-  background-color: #10141e !important;
-  color: #fff;
-}
-
-input:-webkit-autofill:focus {
-  background-color: #10141e !important;
-  color: #fff;
+  background-color: #161d2f !important;
+  color: #eff6ff !important;
 }

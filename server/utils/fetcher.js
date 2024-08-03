@@ -23,7 +23,7 @@ const fetchFromTmdb = async (endpoint, params = "") => {
       attempts++;
       console.log(url);
       if (attempts >= FETCH_RETRY) throw new Error(err);
-      console.log(`Retrying... attempt: ${attempts}`);
+      console.log(`Retried... attempt: ${attempts}`);
       await new Promise((res) => setTimeout(res, RETRY_DALAY));
     }
   }

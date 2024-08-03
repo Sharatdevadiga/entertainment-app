@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-function Input({ name, placeholder, error, onFocus, onChange, onBlur }) {
+function Input({ name, placeholder, error, onFocus, onChange, onBlur, value }) {
   return (
     <div className="relative flex flex-col gap-1">
       <input
@@ -9,6 +9,7 @@ function Input({ name, placeholder, error, onFocus, onChange, onBlur }) {
         onFocus={onFocus}
         onChange={onChange}
         onBlur={onBlur}
+        value={value}
       />
       {error && (
         <p className="absolute right-0 top-1/2 translate-y-[-50%] text-sm text-primary opacity-50">

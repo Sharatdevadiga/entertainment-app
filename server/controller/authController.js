@@ -4,7 +4,7 @@ import User from "../models/userModel.js";
 import jsonwebtoken from "jsonwebtoken";
 import { errorHandler } from "../utils/handlers.js";
 
-const saltRounds = 10;
+const saltRounds = 12;
 
 function signToken(id) {
   const payload = { userId: id };
@@ -51,9 +51,10 @@ export async function userSignup(req, res, next) {
   try {
     // IF EMAIL ALREADY TAKEN THEN SHOW ERROR
     const { email, password } = req.body;
+    console.log(req.body);
     let user = await User.findOne({ email });
     if (user) {
-      return res.status(400).json({
+      return res.status(409).json({
         status: "fail",
         message: "User already exists, try different Email",
       });
