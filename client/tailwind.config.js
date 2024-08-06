@@ -8,6 +8,7 @@ export default {
         primary: "#FC4747",
         secondary: "#5A698F",
         "gray-dark": "#10141E",
+        "gray-transparent": "#0000006a",
         gray: "#161D2F",
         white: "#FFF",
       },
@@ -32,6 +33,10 @@ export default {
 
       screens: {
         xs: "400px",
+      },
+
+      width: {
+        100: "25rem",
       },
     },
   },

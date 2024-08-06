@@ -1,4 +1,4 @@
-import Logo from "../components/Logo";
+import Logo from "../components/general/Logo";
 import useForm from "../hooks/useForm";
 import InputField from "../components/form/InputField";
 import { validateEmail } from "../utils/validators";

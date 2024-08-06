@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import useForm from "../hooks/useForm";
-import Logo from "../components/Logo";
+import Logo from "../components/general/Logo";
 import InputField from "../components/form/InputField";
 import {
   validateEmail,

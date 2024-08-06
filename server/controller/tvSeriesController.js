@@ -13,8 +13,8 @@ export const fetchTvSeries = asyncHandler(async function (req, res, next) {
   const endPoint = "discover/tv";
   const params = `&include_adult=true&&language=en-US&page=${page}&sort_by=popularity.desc`;
   const data = await fetchFromTmdb(endPoint, params);
-  const movies = data?.results.slice(0, 14);
-  return movies;
+  const tvSeries = data?.results.slice(0, 14);
+  return tvSeries;
 }, statusInfo);
 
 export const fetchTvSeriesDetails = asyncHandler(async function (
@@ -33,7 +33,7 @@ export const fetchTvSeriesCast = asyncHandler(async function (req, res, next) {
   const endpoint = `tv/${req.params.id}/credits`;
   const params = "&language=en-US";
   const data = await fetchFromTmdb(endpoint, params);
-  return data;
+  return data.cast;
 }, statusInfo);
 
 export const fetchTvSeriesUrl = asyncHandler(async function (req, res, next) {

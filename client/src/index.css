@@ -1,6 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+html {
+  box-sizing: border-box;
+}
 
 @layer base {
   h1 {
@@ -64,4 +67,22 @@ input:-moz-autofill:active {
 input:-ms-input-placeholder {
   background-color: #161d2f !important;
   color: #eff6ff !important;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+}
+
+.xyz {
+  background: #0000007f;
 }

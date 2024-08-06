@@ -24,13 +24,13 @@ export const fetchMovieCast = asyncHandler(async function (req, res, next) {
   const endpoint = `movie/${req.params.id}/credits`;
   const params = "&language=en-US";
   const data = await fetchFromTmdb(endpoint, params);
-  return data;
+  console.log(data.cast);
+  return data.cast;
 }, defaultStatusInfo);
 
 export const fetchMovieUrl = asyncHandler(async function (req, res, next) {
-  // https://api.themoviedb.org/3/movie/movie_id/videos?language=en-US
   const endpoint = `movie/${req.params.id}/videos`;
   const params = `&language=en-US`;
   const data = await fetchFromTmdb(endpoint, params);
-  return data;
+  return data.results;
 }, defaultStatusInfo);
