@@ -1,5 +1,13 @@
 /* eslint-disable react/prop-types */
-function Input({ name, placeholder, error, onFocus, onChange, onBlur, value }) {
+function InputField({
+  name,
+  placeholder,
+  error,
+  onFocus,
+  onChange,
+  onBlur,
+  value,
+}) {
   return (
     <div className="relative flex flex-col gap-1">
       <input
@@ -20,4 +28,4 @@ function Input({ name, placeholder, error, onFocus, onChange, onBlur, value }) {
   );
 }
 
-export default Input;
+export default InputField;

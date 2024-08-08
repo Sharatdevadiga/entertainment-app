@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { extractUrlData, formateMediagData } from "../utils/dataFormater.js";
 import fetchFromTmdb from "../utils/fetcher.js";
 import { asyncHandler } from "../utils/handlers.js";
 
@@ -9,11 +10,12 @@ let statusInfo = {
 };
 
 export const fetchTvSeries = asyncHandler(async function (req, res, next) {
-  const page = parseInt(req.params.page) || 1;
+  console.log(req.params);
+  const page = parseInt(req.query.page) || 1;
   const endPoint = "discover/tv";
   const params = `&include_adult=true&&language=en-US&page=${page}&sort_by=popularity.desc`;
   const data = await fetchFromTmdb(endPoint, params);
-  const tvSeries = data?.results.slice(0, 14);
+  const tvSeries = formateMediagData(data?.results, "tv");
   return tvSeries;
 }, statusInfo);
 
@@ -40,5 +42,6 @@ export const fetchTvSeriesUrl = asyncHandler(async function (req, res, next) {
   const endpoint = `tv/${req.params.id}/videos`;
   const params = `&language=en-US`;
   const data = await fetchFromTmdb(endpoint, params);
-  return data;
+  const urlData = extractUrlData(data.results);
+  return urlData;
 }, statusInfo);

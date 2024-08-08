@@ -16,7 +16,11 @@ function MediaCard({ data, type = "normal" }) {
             <OverLay />
           </div>
           <Bookmark className=""></Bookmark>
-          <PlayButton className="scale-0 transition-all group-hover:scale-100" />
+          <PlayButton
+            id={data?.id}
+            mediaType={data?.type}
+            className="scale-0 transition-all group-hover:scale-100"
+          />
           <Descreption
             className="absolute bottom-2 left-2 w-11/12 xs:bottom-3 md:left-3"
             data={data}
@@ -31,7 +35,11 @@ function MediaCard({ data, type = "normal" }) {
         <div className="group relative overflow-hidden rounded-lg">
           <Image posterPath={data?.poster} />
           <OverLay />
-          <PlayButton className="scale-0 transition-all group-hover:scale-100" />
+          <PlayButton
+            id={data?.id}
+            mediaType={data?.type}
+            className="scale-0 transition-all group-hover:scale-100"
+          />
         </div>
         <Bookmark className=""></Bookmark>
 

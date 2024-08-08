@@ -26,6 +26,30 @@ export function randomSorter(arr1, arr2) {
   return merged;
 }
 
-// export function extractUrl(data) {
-//   const YOUTUBE_BASE_URL = "";
-// }
+export function extractUrlData(data) {
+  const YOUTUBE_BASE_URL = "https://www.youtube.com/watch?v=";
+
+  let key = null;
+
+  key = data.find(
+    (item) => item.type === "Trailer" && item.site === "YouTube"
+  ).key;
+
+  if (!key)
+    key = data.find(
+      (item) => item.type === "Teaser" && item.site === "YouTube"
+    ).key;
+
+  if (!key) {
+    key = data[0]?.key;
+  }
+
+  if (key) {
+    return {
+      key,
+      youtube: `${YOUTUBE_BASE_URL}${key}`,
+    };
+  } else {
+    return { key: null, youtube: null };
+  }
+}

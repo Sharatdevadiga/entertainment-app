@@ -1,3 +1,4 @@
+import SearchBar from "../components/general/SearchBar";
 import MediaCard from "../components/mediaCard/MediaCard";
 import { endpoints } from "../config/config";
 import useCustomFetcher from "../hooks/useCustomFetcher";
@@ -7,13 +8,13 @@ function HomePage() {
     data: trendingData,
     isLoading: isTrendingDtaLoading,
     isError: isTrendingDataError,
-  } = useCustomFetcher(endpoints.trending);
+  } = useCustomFetcher(endpoints.trending, "trendingData");
 
   const {
     data: recommendationsData,
     isLoading: isRecommendationsDataLoading,
     isError: isRecommendationsDataError,
-  } = useCustomFetcher(endpoints.recommendations);
+  } = useCustomFetcher(endpoints.recommendations, "recommendationsData");
 
   if (isTrendingDtaLoading || isRecommendationsDataLoading)
     return <div>Loading...</div>;
@@ -22,6 +23,7 @@ function HomePage() {
 
   return (
     <main className="w-full space-y-12">
+      <SearchBar type="media"></SearchBar>
       {/* trending section*/}
       <section className="space-y-4">
         <h2>Trending</h2>
