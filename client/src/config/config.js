@@ -9,6 +9,7 @@ export const endpoints = {
   recommendations: "api/media/recommendations",
   movies: "api/movies/",
   tvSeries: "api/tvSeries/",
+  search: "api/searchMovieOrTv/",
 };
 
 export const IMDB_BASE_URL = "https://www.imdb.com/title/";

@@ -32,7 +32,7 @@ export const login = async function (email, password) {
   }
 };
 
-export const fetcher = async function (endpoint) {
+export const fetcher = async function (endpoint, body = null) {
   let tries = 0;
 
   while (tries < RETRY) {

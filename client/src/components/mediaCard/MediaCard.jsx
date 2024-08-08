@@ -104,7 +104,7 @@ function Descreption({ data, className }) {
       className={`${className} cursor-pointer`}
     >
       <div className="flex gap-2 text-[10px] xs:text-[10px]">
-        <p>{date.split("-")[0]}</p>
+        <p>{date ? date.split("-")[0] : "N/A"}</p>
         <p className="gap:0.5 flex items-center">
           {type === "movie" ? <MdLocalMovies /> : <TbDeviceTvOld />}
           {type.toUpperCase()}

@@ -11,7 +11,6 @@ import MediaDetails from "./pages/MediaDetails";
 function App() {
   return (
     <div>
-      {/* <h1>ENTERTAINMENT APP</h1> */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />

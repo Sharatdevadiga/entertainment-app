@@ -35,7 +35,7 @@ export const asyncHandler = function (
   return async function (req, res, next) {
     try {
       // execute the async function
-      const data = await fn(req, res, next);
+      let data = await fn(req, res, next);
 
       // if gets data then send it as response
       if (data) successHandler(res, successStatusCode, data);

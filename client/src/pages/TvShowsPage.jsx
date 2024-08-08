@@ -1,6 +1,8 @@
-import SearchBar from "../components/general/SearchBar";
-import MediaCard from "../components/mediaCard/MediaCard";
+import useSearch from "../hooks/useSearch";
 import usePaginatedMediaFetcher from "../hooks/usePaginatedMediaFetcher";
+import SearchBar from "../components/general/SearchBar";
+import SearchResults from "../components/general/SearchResults";
+import PaginatedMedia from "../components/general/PaginatedMedia";
 
 function MoviesPage() {
   const {
@@ -11,34 +13,37 @@ function MoviesPage() {
     loadPaginatedData,
   } = usePaginatedMediaFetcher("tv", "tvSeries");
 
-  if (isGlobalError) return <div>Error Loading data</div>;
+  const {
+    searchQuery,
+    setSearchQuery,
+    searchResults,
+    isSearchLoading,
+    searchError,
+    debouncedSearchQuery,
+  } = useSearch("tv");
+
+  if (isGlobalError) return <div>Error loading data</div>;
 
   return (
     <main className="w-full space-y-12">
-      <SearchBar type="tv"></SearchBar>
-      <section className="flex flex-col gap-4">
-        <h2>Tv shows</h2>
-        {isLoading && mediaData.length === 0 ? (
-          <div>Loading...</div>
-        ) : (
-          <div className="grid gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {mediaData.map((item) => (
-              <MediaCard data={item} key={`${item.id}${item.title}`} />
-            ))}
-          </div>
-        )}
-        {!isLoading && mediaData.length > 0 && (
-          <div className="flex w-full place-content-center">
-            <button
-              onClick={loadPaginatedData}
-              className="bg-primary px-3 py-1"
-            >
-              See More
-            </button>
-          </div>
-        )}
-        {isLocalError && <div>Error Loading more data</div>}
-      </section>
+      <SearchBar type="tv" onSearch={setSearchQuery} />
+      {searchQuery ? (
+        <SearchResults
+          searchQuery={searchQuery}
+          searchResults={searchResults}
+          isSearchLoading={isSearchLoading}
+          searchError={searchError}
+          debouncedSearchQuery={debouncedSearchQuery}
+        />
+      ) : (
+        <PaginatedMedia
+          mediaData={mediaData}
+          isLoading={isLoading}
+          loadPaginatedData={loadPaginatedData}
+          isLocalError={isLocalError}
+          title="Tv Series"
+        />
+      )}
     </main>
   );
 }
