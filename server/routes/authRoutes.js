@@ -4,7 +4,7 @@ import {
   userLogout,
   userSignup,
 } from "../controller/authController.js";
-import { protect } from "../middlewares/JWTVerification.js";
+import { protect } from "../middlewares/jwtVerification.js";
 
 const authRouter = express.Router();
 

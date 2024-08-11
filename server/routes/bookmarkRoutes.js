@@ -4,7 +4,7 @@ import {
   deleteUserBookmark,
   getUserBookMarks,
 } from "../controller/bookmarkController.js";
-import { protect } from "../middlewares/JWTVerification.js";
+import { protect } from "../middlewares/jwtVerification.js";
 
 const bookmarkRouter = express.Router();
 bookmarkRouter.use(protect);
