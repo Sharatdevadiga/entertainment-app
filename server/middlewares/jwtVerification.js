@@ -3,6 +3,7 @@ import User from "../models/userModel.js";
 import jsonwebtoken from "jsonwebtoken";
 import { errorHandler } from "../utils/handlers.js";
 
+//
 export async function protect(req, res, next) {
   let token;
   const headerCondition =
