@@ -15,7 +15,7 @@ function createMediaInstance(data) {
   return new Media(mediaData);
 }
 
-export const addUserBookmark = async function (req, res, next) {
+export const addUserBookmark = async function (req, res) {
   // console.log(req.body);
   const userId = req.user._id;
   const id = req.body.id;
@@ -58,7 +58,7 @@ export const addUserBookmark = async function (req, res, next) {
   }
 };
 
-export const deleteUserBookmark = async function (req, res, next) {
+export const deleteUserBookmark = async function (req, res) {
   const userId = req.user._id;
   const { mediaId } = req.body;
 
@@ -76,7 +76,7 @@ export const deleteUserBookmark = async function (req, res, next) {
   }
 };
 
-export const getUserBookMarks = async function (req, res, next) {
+export const getUserBookMarks = async function (req, res) {
   const userId = req.user._id;
   try {
     const userBookmarks = await UserBookmark.find({ userId })

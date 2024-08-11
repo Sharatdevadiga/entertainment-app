@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon index.js",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "build": "echo 'No build steps needed'"
   },
   "keywords": [],
   "author": "Sharath",
