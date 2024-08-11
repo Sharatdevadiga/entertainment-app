@@ -8,6 +8,8 @@ import CastDetails from "../components/mediaDetails/CastDetails";
 import MediaLinks from "../components/mediaDetails/MediaLinks";
 import Genres from "../components/mediaDetails/Genres";
 import Synopsis from "../components/mediaDetails/Synopsis";
+import Loader from "../components/general/Loader";
+import ErrorIndicator from "../components/general/ErrorIndicator";
 
 function MediaDetails() {
   const { type, id } = useParams();
@@ -22,10 +24,9 @@ function MediaDetails() {
     isError: isMediaDetailsError,
   } = useCustomFetcher(mediaDetailsEndpoint);
 
-  if (ismediaDetailsLoading) return <div>Loading...</div>;
-  if (isMediaDetailsError) return <div>Error</div>;
+  if (ismediaDetailsLoading) return <Loader type="child" size="small"></Loader>;
+  if (isMediaDetailsError) return <ErrorIndicator></ErrorIndicator>;
 
-  console.log(mediaDetails);
   if (mediaDetails)
     return (
       <main className="grid grid-cols-1 p-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-12 lg:p-12">

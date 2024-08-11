@@ -28,7 +28,6 @@ function useSearch(type = "movie", initialQuery = "") {
     try {
       setIsSearchLoading(true);
       const data = await fetcher(endpoint);
-      console.log(data.data);
 
       //   setSearchResults([...data.data.movie]);
       setSearchResults(data.data);
@@ -42,6 +41,10 @@ function useSearch(type = "movie", initialQuery = "") {
   useEffect(() => {
     if (debouncedSearchQuery) {
       fetchData(debouncedSearchQuery);
+    }
+
+    if (searchQuery.length === 0) {
+      setSearchResults(() => []);
     }
   }, [debouncedSearchQuery]);
 

@@ -5,21 +5,20 @@ import UserBookmark from "../models/userBookmark.js";
 
 function createMediaInstance(data) {
   const mediaData = {
-    tmdbId: data.tmdbId,
-    mediaType: data?.mediaType || "movie",
+    id: data.id,
+    poster: data?.poster || "",
     title: data?.title || "",
-    imagePath: data?.imagePath || "",
+    type: data?.type || "movie",
     adult: data?.adult ? data.adult : false,
-    releaseDate: data?.releaseDate || "",
-    posterPath: data?.posterPath || "",
-    overview: data?.overview || "",
+    date: data?.releaseDate || "",
   };
   return new Media(mediaData);
 }
 
 export const addUserBookmark = async function (req, res, next) {
+  // console.log(req.body);
   const userId = req.user._id;
-  const { tmdbId } = req.body;
+  const id = req.body.id;
 
   // CREATE A TRANSACTION TO ENSURE CONSISTENCY
   const session = await mongoose.startSession();
@@ -27,7 +26,7 @@ export const addUserBookmark = async function (req, res, next) {
 
   try {
     // 1. CREATE AND SAVE A NEW MEDIA IF ITS NOT IN DATABASE
-    let media = await Media.findOne({ tmdbId }).session(session);
+    let media = await Media.findOne({ id }).session(session);
     if (!media) media = createMediaInstance(req.body);
     await media.save({ session });
 
@@ -48,7 +47,7 @@ export const addUserBookmark = async function (req, res, next) {
 
     // 4. SEND SUCCESSRESPONSE AND GOTO NEXT MIDDLEWARE
     successHandler(res, 201, media);
-    next();
+    // next();
   } catch (err) {
     // 5. ON FAILED TRANSACTION ABORT AND END IT
     await session.abortTransaction();
@@ -64,10 +63,14 @@ export const deleteUserBookmark = async function (req, res, next) {
   const { mediaId } = req.body;
 
   try {
-    await UserBookmark.deleteOne({ userId, mediaId });
+    const data = await UserBookmark.findOneAndDelete({ userId, mediaId });
+    console.log(data);
+    if (data === null) {
+      return errorHandler(res, 404, "No bookmark found");
+    }
 
     successHandler(res, 200, []);
-    next();
+    // next();
   } catch (err) {
     errorHandler(res, 500, "Failed to remove the bookmark", err);
   }
@@ -80,11 +83,9 @@ export const getUserBookMarks = async function (req, res, next) {
       .populate("mediaId")
       .select("-_id -userId");
 
-    if (!userBookmarks || userBookmarks.length === 0) {
-      return errorHandler(res, 409, "User has no bookmarks");
-    }
-    successHandler(res, 200, userBookmarks);
-    next();
+    const bookmarks = userBookmarks.map((bookmark) => bookmark.mediaId);
+    successHandler(res, 200, bookmarks);
+    // next();
   } catch (err) {
     errorHandler(res, 500, "Failed to get user bookmarks", err);
   }

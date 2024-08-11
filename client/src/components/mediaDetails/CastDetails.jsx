@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { endpoints } from "../../config/config";
 import useCustomFetcher from "../../hooks/useCustomFetcher";
+import Loader from "../general/Loader";
 import BoxName from "./BoxName";
 
 function CastDetails({ type, id }) {
@@ -15,7 +16,7 @@ function CastDetails({ type, id }) {
     isError: isMediaCastError,
   } = useCustomFetcher(`${mediaCastEndpoint}`);
 
-  if (isMediaCastLoading) return <div>Loading...</div>;
+  if (isMediaCastLoading) return <Loader type="child" size="small"></Loader>;
   if (isMediaCastError) return <div> Error</div>;
 
   if (mediaCast) {

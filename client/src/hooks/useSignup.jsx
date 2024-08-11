@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { signup } from "../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const useSignUp = function () {
   const [signupStatus, setSignupStatus] = useState(undefined);
   const [signupMessage, setSignupMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSignup = async function (values, resetFields) {
     try {
@@ -12,7 +14,9 @@ const useSignUp = function () {
 
       if (data?.status === "success") {
         setSignupStatus("success");
-        console.log("Signup successful");
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       } else {
         setSignupStatus("fail");
       }

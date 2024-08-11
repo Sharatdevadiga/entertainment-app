@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { login } from "../utils/api";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { markAuthenticated } from "../features/auth/authSlice";
+import { fetchBookmarks } from "../features/bookmark/bookmarkSlice";
 
 const useLogin = function () {
   const [loginStatus, setloginStatus] = useState(undefined);
   const [loginMessage, setloginMessage] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = async function (values, resetFields) {
     try {
@@ -12,7 +19,16 @@ const useLogin = function () {
 
       if (data?.status === "success") {
         setloginStatus("success");
-        console.log("login successful");
+        dispatch(
+          markAuthenticated({
+            isAuthenticated: true,
+            user: { email: values.email },
+          }),
+        );
+        await dispatch(fetchBookmarks()).unwrap();
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
       } else {
         setloginStatus("fail");
       }

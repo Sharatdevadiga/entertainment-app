@@ -7,7 +7,7 @@ import { extractUrlData, formateMediagData } from "../utils/dataFormater.js";
 export const fetchMovies = asyncHandler(async function (req, res, next) {
   const page = parseInt(req.query.page) || 1;
   const endPoint = "discover/movie";
-  const params = `&include_adult=true&include_video=true&language=en-US&page=${page}&sort_by=popularity.desc`;
+  const params = `&include_adult=false&include_video=true&language=en-US&page=${page}&sort_by=popularity.desc`;
   const data = await fetchFromTmdb(endPoint, params);
   const movies = formateMediagData(data?.results, "movie");
   return movies;

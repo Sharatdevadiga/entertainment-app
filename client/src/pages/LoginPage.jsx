@@ -56,7 +56,6 @@ function LoginPage() {
           error={errors.password}
           onChange={handleChange}
           onFocus={handleFocus}
-          onBlur={handleBlur}
         />
 
         <p
@@ -66,7 +65,7 @@ function LoginPage() {
         </p>
 
         <button type="submit" className="btn--cta" disabled={isSubmitting}>
-          {isSubmitting ? "Logging in" : "Login to your account"}
+          {isSubmitting ? "Logging in..." : "Login to your account"}
         </button>
 
         <p className="text-center text-body-s">

@@ -21,7 +21,7 @@ function SearchBar({ type = "media", onSearch }) {
   }
 
   return (
-    <div className="z-40 flex w-full items-center justify-center gap-1 rounded-lg border-b-[1px] border-gray bg-gray-dark px-6 focus-within:border-stone-500">
+    <div className="sticky top-0 z-40 flex w-full items-center justify-center gap-1 rounded-b-md border-b-[1px] border-gray bg-gray-dark px-6 focus-within:border-stone-500">
       <FaMagnifyingGlass />
       <input
         name="searchBar"

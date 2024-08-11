@@ -22,7 +22,7 @@ function Navigation() {
         />
       </div>
       <div className="ml-auto md:ml-0 md:mt-auto">
-        <NavItem to="/" icon={<FaUser className="h-4 w-4" />} />
+        <NavItem to="user" icon={<FaUser className="h-4 w-4" />} />
       </div>
     </nav>
   );

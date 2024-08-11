@@ -2,9 +2,9 @@
 import { POSTER_BASE_URL } from "../../config/config";
 import { MdLocalMovies } from "react-icons/md";
 import { TbDeviceTvOld } from "react-icons/tb";
-import Bookmark from "./Bookmark";
 import PlayButton from "./PlayButton";
 import { NavLink } from "react-router-dom";
+import Bookmark from "./Bookmark";
 
 function MediaCard({ data, type = "normal" }) {
   if (type === "trending")
@@ -15,7 +15,7 @@ function MediaCard({ data, type = "normal" }) {
             <Image posterPath={data?.poster} />
             <OverLay />
           </div>
-          <Bookmark className=""></Bookmark>
+          <Bookmark className="" data={data}></Bookmark>
           <PlayButton
             id={data?.id}
             mediaType={data?.type}
@@ -29,24 +29,25 @@ function MediaCard({ data, type = "normal" }) {
       </div>
     );
 
-  return (
-    <div>
-      <SmallCardContainer>
-        <div className="group relative overflow-hidden rounded-lg">
-          <Image posterPath={data?.poster} />
-          <OverLay />
-          <PlayButton
-            id={data?.id}
-            mediaType={data?.type}
-            className="scale-0 transition-all group-hover:scale-100"
-          />
-        </div>
-        <Bookmark className=""></Bookmark>
+  if (data)
+    return (
+      <div>
+        <SmallCardContainer>
+          <div className="group relative overflow-hidden rounded-lg">
+            <Image posterPath={data?.poster} />
+            <OverLay />
+            <PlayButton
+              id={data?.id}
+              mediaType={data?.type}
+              className="scale-0 transition-all group-hover:scale-100"
+            />
+          </div>
+          <Bookmark className="" data={data}></Bookmark>
 
-        <Descreption className="p-2" data={data} />
-      </SmallCardContainer>
-    </div>
-  );
+          <Descreption className="p-2" data={data} />
+        </SmallCardContainer>
+      </div>
+    );
 }
 
 export default MediaCard;
@@ -94,13 +95,12 @@ function Image({ posterPath }) {
     </>
   );
 }
-// absolute bottom-2 left-2 w-11/12 xs:bottom-3 md:left-3
 
 function Descreption({ data, className }) {
   const { id, date, type, title, adult } = data;
   return (
     <NavLink
-      to={`mediaDetails/${type}/${id}`}
+      to={`/mediaDetails/${type}/${id}`}
       className={`${className} cursor-pointer`}
     >
       <div className="flex gap-2 text-[10px] xs:text-[10px]">

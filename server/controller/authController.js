@@ -42,8 +42,8 @@ async function createSendTokenWithCookie(
       token,
     });
   } catch (err) {
-    res.status(500).json({ status: "fail", message: "Token creation failed" });
     console.error(err);
+    res.status(500).json({ status: "fail", message: "Token creation failed" });
   }
 }
 
@@ -67,7 +67,7 @@ export async function userSignup(req, res, next) {
       // SIGN AND SEND THE TOKEN IN COOKIE
       const successmessage = "Successfully signed up";
       await createSendTokenWithCookie(newUser, 201, req, res, successmessage);
-      next();
+      // next();
     }
   } catch (err) {
     errorHandler(res, 500, "Sign up Failed", err);
@@ -80,18 +80,18 @@ export async function userLogin(req, res, next) {
 
     //1. IF EMAIL AND PASSWORD ARE NOT THER SEND ERROR
     if (!email || !password)
-      errorHandler(res, 404, "Please provide proper email and password");
+      return errorHandler(res, 404, "Please provide proper email and password");
 
     // 2. FIND USER AND VERIFY PASSWORD
     const user = await User.findOne({ email }).select("+password");
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
 
     if (!user || !isPasswordCorrect)
-      errorHandler(res, 404, "Incorrect email/password.");
+      return errorHandler(res, 404, "Incorrect email/password.");
 
     // 3. IF EVERYTHING IS OK, SING AND SEND THE TOKEN
     createSendTokenWithCookie(user, 200, req, res, "Successfully logged In");
-    next();
+    // next();
   } catch (err) {
     errorHandler(res, 500, "Login faled, please try again", err);
   }
@@ -111,5 +111,5 @@ export async function userLogout(req, res, next) {
     status: "success",
     message: "successfully logged out",
   });
-  next();
+  // next();
 }

@@ -10,7 +10,7 @@ const searchMovieOrTv = async function (req, type = "movie") {
   console.log(encodedQuery);
   // const pageNum = req.body.page ? req.body.page : 1;
   const endpoint = `search/${type}`;
-  const params = `&query=${encodedQuery}&include_adult=true`;
+  const params = `&query=${encodedQuery}&include_adult=false`;
 
   const data = await fetchFromTmdb(endpoint, params);
   const formatedData = formateMediagData(data.results, type);

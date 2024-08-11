@@ -3,32 +3,31 @@ import mongoose, { Schema } from "mongoose";
 // Overview and Posterpath are stored, incase if needed in future
 const mediaSchema = new Schema(
   {
-    tmdbId: {
+    id: {
       type: Number,
       unique: true,
       required: [true, "Tmdb Id must be specified for a media"],
     },
-    mediaType: {
+    poster: {
       type: String,
-      enum: ["movie", "tv"],
-      required: true,
-      default: "movie",
+      default: null,
     },
     title: {
       type: String,
       required: [true, "Media must have a title"],
     },
-    imagePath: {
+    type: {
       type: String,
+      enum: ["movie", "tv"],
+      required: true,
+      default: "movie",
     },
     adult: {
       type: Boolean,
-      retuired: true,
+      required: true,
       default: false,
     },
-    releaseDate: Date,
-    posterPath: String,
-    overview: String,
+    date: Date,
     createdAt: {
       type: Date,
       default: Date.now(),

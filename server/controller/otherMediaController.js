@@ -15,7 +15,7 @@ export const fetchTrending = asyncHandler(async (req, res, next) => {
 export const fetchRecommendations = asyncHandler(async (req, res, next) => {
   const MovieEndPoint = "discover/movie";
   const tvSeriesEndPoint = "discover/tv";
-  const params = `&include_adult=true&language=en-US&page=1&sort_by=popularity.desc`;
+  const params = `&include_adult=false&language=en-US&page=1&sort_by=popularity.desc`;
 
   const movieData = await fetchFromTmdb(MovieEndPoint, params);
   const tvSeriesdata = await fetchFromTmdb(tvSeriesEndPoint, params);

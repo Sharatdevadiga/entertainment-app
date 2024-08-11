@@ -13,7 +13,7 @@ export const fetchTvSeries = asyncHandler(async function (req, res, next) {
   console.log(req.params);
   const page = parseInt(req.query.page) || 1;
   const endPoint = "discover/tv";
-  const params = `&include_adult=true&&language=en-US&page=${page}&sort_by=popularity.desc`;
+  const params = `&include_adult=false&&language=en-US&page=${page}&sort_by=popularity.desc`;
   const data = await fetchFromTmdb(endPoint, params);
   const tvSeries = formateMediagData(data?.results, "tv");
   return tvSeries;

@@ -4,6 +4,7 @@ import { fetcher } from "../../utils/api";
 import { endpoints } from "../../config/config";
 import { useState } from "react";
 import VideoModal from "./VideoModal";
+import { toast } from "react-toastify";
 
 function PlayButton({ className, id, mediaType = "movie" }) {
   const [urlData, setUrlData] = useState(null);
@@ -24,6 +25,7 @@ function PlayButton({ className, id, mediaType = "movie" }) {
       console.log(data);
     } catch (err) {
       console.log(err);
+      toast("No trailer found! try something else");
     }
   }
 

@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import MediaCard from "../mediaCard/MediaCard";
+import Loader from "./Loader";
 
 function PaginatedMedia({
   mediaData,
@@ -12,9 +13,9 @@ function PaginatedMedia({
     <section className="flex flex-col gap-4">
       <h2>{title}</h2>
       {isLoading && mediaData.length === 0 ? (
-        <div>Loading...</div>
+        <Loader type="child" size="small"></Loader>
       ) : (
-        <div className="grid gap-6 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
           {mediaData?.map((item) => (
             <MediaCard data={item} key={`${item.id}${item.title}`} />
           ))}
