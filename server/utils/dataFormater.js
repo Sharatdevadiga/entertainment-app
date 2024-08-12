@@ -1,6 +1,6 @@
 export function formateMediagData(dataSet, mediaType) {
   let res = [];
-  dataSet.forEach((data) => res.push(formateData(data, mediaType)));
+  dataSet?.forEach((data) => res.push(formateData(data, mediaType)));
   return res;
 
   function formateData(data, mediaType) {

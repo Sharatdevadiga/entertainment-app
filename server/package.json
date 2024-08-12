@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
+    "start:dev": "nodemon index.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "build": "echo 'No build steps needed'"
