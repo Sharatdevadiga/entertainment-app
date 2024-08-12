@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { markAuthenticated } from "../features/auth/authSlice";
-import { fetchBookmarks } from "../features/bookmark/bookmarkSlice";
 
 const useLogin = function () {
   const [loginStatus, setloginStatus] = useState(undefined);
@@ -25,7 +24,7 @@ const useLogin = function () {
             user: { email: values.email },
           }),
         );
-        await dispatch(fetchBookmarks()).unwrap();
+
         setTimeout(() => {
           navigate("/");
         }, 1000);

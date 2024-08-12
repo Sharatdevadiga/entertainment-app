@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ErrorIndicator from "../components/general/ErrorIndicator";
 import Loader from "../components/general/Loader";
 import SearchBar from "../components/general/SearchBar";
@@ -6,8 +7,27 @@ import MediaCard from "../components/mediaCard/MediaCard";
 import { endpoints } from "../config/config";
 import useCustomFetcher from "../hooks/useCustomFetcher";
 import useSearch from "../hooks/useSearch";
+import { useDispatch } from "react-redux";
+import { fetchBookmarks } from "../features/bookmark/bookmarkSlice";
 
 function HomePage() {
+  const isAuthenticated = (state) => state.auth.isAuthenticated;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchUserBookmarks = async () => {
+      if (isAuthenticated) {
+        try {
+          await dispatch(fetchBookmarks()).unwrap();
+        } catch (err) {
+          console.log(err);
+        }
+      }
+    };
+
+    fetchUserBookmarks();
+  }, [isAuthenticated]);
+
   const {
     data: trendingData,
     isLoading: isTrendingDtaLoading,
