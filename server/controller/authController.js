@@ -30,7 +30,8 @@ async function createSendTokenWithCookie(
         Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
-      secure: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "None",
     };
     console.log(cookieOptions.expires);
 
@@ -47,7 +48,7 @@ async function createSendTokenWithCookie(
   }
 }
 
-export async function userSignup(req, res, next) {
+export async function userSignup(req, res) {
   try {
     // IF EMAIL ALREADY TAKEN THEN SHOW ERROR
     const { email, password } = req.body;
@@ -74,7 +75,7 @@ export async function userSignup(req, res, next) {
   }
 }
 
-export async function userLogin(req, res, next) {
+export async function userLogin(req, res) {
   try {
     const { email, password } = req.body;
 
@@ -97,7 +98,7 @@ export async function userLogin(req, res, next) {
   }
 }
 
-export async function userLogout(req, res, next) {
+export async function userLogout(req, res) {
   // replace the existing cookie with an empty cookie
   res.cookie("jwt", "Logged-Out", {
     expires: new Date(
