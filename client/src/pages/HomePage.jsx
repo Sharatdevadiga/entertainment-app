@@ -9,7 +9,6 @@ import useCustomFetcher from "../hooks/useCustomFetcher";
 import useSearch from "../hooks/useSearch";
 import { useDispatch } from "react-redux";
 import { fetchBookmarks } from "../features/bookmark/bookmarkSlice";
-import { toast } from "react-toastify";
 
 function HomePage() {
   const isAuthenticated = (state) => state.auth.isAuthenticated;
