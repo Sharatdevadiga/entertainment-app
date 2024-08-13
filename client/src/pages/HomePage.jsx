@@ -20,8 +20,8 @@ function HomePage() {
       if (isAuthenticated) {
         try {
           await dispatch(fetchBookmarks()).unwrap();
-        } catch {
-          toast.error("failed to update bookmark satus");
+        } catch (err) {
+          return;
         }
       }
     };
