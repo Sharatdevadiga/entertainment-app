@@ -2,8 +2,6 @@
 import YouTube from "react-youtube";
 
 function VideoModal({ data, onClose }) {
-  console.log("from videoModel"); // Debugging log
-  console.log(data);
 
   const opts = {
     height: "100%",

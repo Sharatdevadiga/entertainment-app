@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import "dotenv/config";
-// import dotenv from "dotenv";
-// dotenv.config();
+// import "dotenv/config";
+import dotenv from "dotenv";
+dotenv.config();
 
 import connectDB from "./config/connect.js";
 import express from "express";

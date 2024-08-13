@@ -14,7 +14,6 @@ const useLogin = function () {
   const handleLogin = async function (values, resetFields) {
     try {
       const data = await login(values.email, values.password);
-      console.log(data);
 
       if (data?.status === "success") {
         setloginStatus("success");

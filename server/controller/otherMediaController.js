@@ -8,7 +8,6 @@ export const fetchTrending = asyncHandler(async (req, res, next) => {
   const endpoint = `trending/all/day`;
   const params = "&language=en-US";
   const data = await fetchFromTmdb(endpoint, params);
-  console.log(data);
   return formateMediagData(data?.results || data);
 }, defaultStatusInfo);
 

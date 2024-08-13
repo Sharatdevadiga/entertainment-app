@@ -20,7 +20,7 @@ export async function protect(req, res, next) {
   if (!token) {
     return errorHandler(res, 401, "You must be logged in to access this route");
   }
-  console.log(token);
+
   // 3. verify the token, find the user and attach user on req object for next middleware
   try {
     const decoded = jsonwebtoken.verify(token, process.env.JWT_SECRET);

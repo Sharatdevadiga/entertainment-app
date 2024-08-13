@@ -33,7 +33,6 @@ async function createSendTokenWithCookie(
       secure: process.env.NODE_ENV === "production",
       sameSite: "None",
     };
-    console.log(cookieOptions.expires);
 
     res.cookie("jwt", token, cookieOptions);
 
@@ -52,7 +51,7 @@ export async function userSignup(req, res) {
   try {
     // IF EMAIL ALREADY TAKEN THEN SHOW ERROR
     const { email, password } = req.body;
-    console.log(req.body);
+
     let user = await User.findOne({ email });
     if (user) {
       return res.status(409).json({

@@ -25,7 +25,6 @@ export const fetchMovieCast = asyncHandler(async function (req, res, next) {
   const endpoint = `movie/${req.params.id}/credits`;
   const params = "&language=en-US";
   const data = await fetchFromTmdb(endpoint, params);
-  console.log(data.cast);
   return data.cast;
 }, defaultStatusInfo);
 

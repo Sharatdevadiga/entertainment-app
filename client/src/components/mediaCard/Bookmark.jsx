@@ -56,8 +56,7 @@ function Bookmark({ className, data }) {
         // Add bookmark to Redux state
         dispatch(addBookmarkToSlice(data));
       }
-    } catch (err) {
-      console.log(err);
+    } catch {
       toast.error("An error occurred while updating bookmark status.");
     }
   }

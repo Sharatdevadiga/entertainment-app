@@ -10,7 +10,6 @@ const useSignUp = function () {
   const handleSignup = async function (values, resetFields) {
     try {
       const data = await signup(values.email, values.password);
-      console.log(data);
 
       if (data?.status === "success") {
         setSignupStatus("success");

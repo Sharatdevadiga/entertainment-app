@@ -3,8 +3,6 @@ function MediaFacts({ data, type }) {
   let languages = [];
   data?.spoken_languages.forEach((lng) => languages.push(lng.name));
 
-  console.log(data);
-
   if (type === "movie")
     return (
       <div className="flex flex-wrap justify-between gap-3 text-body-s">

@@ -7,8 +7,6 @@ import { formateMediagData } from "../utils/dataFormater.js";
 
 const searchMovieOrTv = async function (req, type = "movie") {
   const encodedQuery = encodeURIComponent(req.query.query);
-  console.log(encodedQuery);
-  // const pageNum = req.body.page ? req.body.page : 1;
   const endpoint = `search/${type}`;
   const params = `&query=${encodedQuery}&include_adult=false`;
 

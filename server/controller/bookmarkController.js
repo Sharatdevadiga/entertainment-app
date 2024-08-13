@@ -16,7 +16,6 @@ function createMediaInstance(data) {
 }
 
 export const addUserBookmark = async function (req, res) {
-  // console.log(req.body);
   const userId = req.user._id;
   const id = req.body.id;
 
@@ -64,7 +63,6 @@ export const deleteUserBookmark = async function (req, res) {
 
   try {
     const data = await UserBookmark.findOneAndDelete({ userId, mediaId });
-    console.log(data);
     if (data === null) {
       return errorHandler(res, 404, "No bookmark found");
     }

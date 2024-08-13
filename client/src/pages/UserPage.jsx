@@ -13,8 +13,6 @@ function UserPage() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.auth.user);
 
-  console.log(isAuthenticated, user);
-
   async function handleLogout() {
     try {
       const result = await logout();

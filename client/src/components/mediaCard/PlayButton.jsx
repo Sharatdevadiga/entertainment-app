@@ -22,9 +22,9 @@ function PlayButton({ className, id, mediaType = "movie" }) {
         setUrlData(data.data);
         setIsModalOpen(true);
       }
-      console.log(data);
-    } catch (err) {
-      console.log(err);
+      
+    } catch {
+      
       toast("No trailer found! try something else");
     }
   }

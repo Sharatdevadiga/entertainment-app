@@ -112,7 +112,6 @@ export const deleteBookmark = async function (
       }
 
       const response = await fetch(url, options);
-      console.log(response);
 
       if (response.status === 401) return response;
 
@@ -123,7 +122,6 @@ export const deleteBookmark = async function (
       const data = await response.json();
       return data;
     } catch (err) {
-      console.log(err);
       tries++;
       if (tries >= RETRY) {
         throw new Error(
