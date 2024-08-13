@@ -12,8 +12,11 @@ function MediaCard({ data, type = "normal" }) {
       <div>
         <LargeCardContainer className="group">
           <div>
-            <Image posterPath={data?.poster} />
-            <OverLay />
+            <NavLink to={`/mediaDetails/${data.type}/${data.id}`}>
+              <Image posterPath={data?.poster} />
+            </NavLink>
+
+            <OverLay className="pointer-events-none" />
           </div>
           <Bookmark className="" data={data}></Bookmark>
           <PlayButton
@@ -34,8 +37,10 @@ function MediaCard({ data, type = "normal" }) {
       <div>
         <SmallCardContainer>
           <div className="group relative overflow-hidden rounded-lg">
-            <Image posterPath={data?.poster} />
-            <OverLay />
+            <NavLink to={`/mediaDetails/${data.type}/${data.id}`}>
+              <Image posterPath={data?.poster} />
+            </NavLink>
+            <OverLay className="pointer-events-none" />
             <PlayButton
               id={data?.id}
               mediaType={data?.type}
