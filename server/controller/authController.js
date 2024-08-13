@@ -100,16 +100,15 @@ export async function userLogin(req, res) {
 export async function userLogout(req, res) {
   // replace the existing cookie with an empty cookie
   res.cookie("jwt", "Logged-Out", {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-    ),
+    expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "None",
   });
 
   // then send the response status code and a message
   res.status(200).json({
     status: "success",
-    message: "successfully logged out",
+    message: "Successfully logged out",
   });
-  // next();
 }
