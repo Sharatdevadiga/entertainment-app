@@ -87,11 +87,11 @@ This project is a full-stack application developed to allow the users to add boo
 
 ## API Documentation
 
-Detailed API documentation is available in the Postman collection included in the repository. This documentation covers all endpoints, including user authentication, movie/TV series retrieval, and bookmark management.
+Detailed API documentation is available in the Postman collection included in the repository. This documentation covers all endpoints, including user authentication, movie/TV series retrieval, and bookmark management. You can access the documentation [here](https://documenter.getpostman.com/view/34641929/2sA3s4kAHk).
 
 ## Deployment
 
-The project is deployed on Render, making it live and accessible. You can access the live project [here](https://your-project-link.render.com).
+The project is deployed on Render, making it live and accessible. You can access the live project [here](https://entertainment-app-sandy.vercel.app/).
 
 Feel free to explore the codebase and reach out if you have any questions or suggestions!
 
