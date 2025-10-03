@@ -154,7 +154,7 @@ export const getBookMarks = async function (
         },        
       };
 
-      console.log("Fetch options:", options);
+      // console.log("Fetch options:", options);
 
       const response = await fetch(url, options);
 
