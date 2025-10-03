@@ -2,7 +2,9 @@
 // export const BASE_URL = "https://entertainmentapp.up.railway.app/";
 // export const BASE_URL = "https://entertainment-app-9bsw.onrender.com/";
 
-export const BASE_URL = "https://entertainment-app-sharath.onrender.com/";
+// export const BASE_URL = "https://entertainment-app-sharath.onrender.com/";
+
+export const BASE_URL = "https://api1.sharath-devadiga.co.in/";
 
 export const RETRY = 3;
 export const POSTER_BASE_URL = "https://image.tmdb.org/t/p/w500/";
