@@ -32,7 +32,8 @@ const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:3000', 
   'http://localhost:4173',
-  'https://entertainment-app-sandy.vercel.app'
+  'https://entertainment-app-sandy.vercel.app',
+  'https://entertainmentapp.sharath-devadiga.co.in' 
 ];
 
 const corsOptions = {
