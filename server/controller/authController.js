@@ -25,14 +25,20 @@ async function createSendTokenWithCookie(
 ) {
   try {
     const token = signToken(user._id);
+    
+    // Get the origin from the request
+    const origin = req.headers.origin;
+    const isLocalhost = origin && origin.includes('localhost');
+    
     const cookieOptions = {
       expires: new Date(
         Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
       ),
       httpOnly: true,
-      secure: true,
-      sameSite: "Lax",
-      domain: '.sharath-devadiga.co.in', 
+      secure: true, // Always true for production
+      sameSite: isLocalhost ? 'None' : 'Lax', // 'None' required for cross-site
+      // Remove domain for localhost, set for production
+      ...(isLocalhost ? {} : { domain: '.sharath-devadiga.co.in' })
     };
 
     res.cookie("jwt", token, cookieOptions);
@@ -99,16 +105,17 @@ export async function userLogin(req, res) {
 }
 
 export async function userLogout(req, res) {
-  // replace the existing cookie with an empty cookie
+  const origin = req.headers.origin;
+  const isLocalhost = origin && origin.includes('localhost');
+  
   res.cookie("jwt", "Logged-Out", {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
     secure: true,
-    sameSite: "Lax",
-    domain: '.sharath-devadiga.co.in',
+    sameSite: isLocalhost ? 'None' : 'Lax',
+    ...(isLocalhost ? {} : { domain: '.sharath-devadiga.co.in' })
   });
 
-  // then send the response status code and a message
   res.status(200).json({
     status: "success",
     message: "Successfully logged out",

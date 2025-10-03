@@ -6,6 +6,7 @@ export const signup = async function (email, password) {
     const response = await fetch(`${BASE_URL}${endpoints.signup}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      credentials: "include", 
       body: JSON.stringify({ email, password }),
     });
 
@@ -56,6 +57,8 @@ export const addBookmark = async function (
   let tries = 0;
   const url = `${BASE_URL}${endpoint}`;
 
+  console.log("Adding bookmark to URL:", url);
+
   while (tries < RETRY) {
     try {
       const options = {
@@ -69,6 +72,8 @@ export const addBookmark = async function (
       if (body) {
         options.body = JSON.stringify(body);
       }
+
+      console.log("Fetch options:", options);
 
       const response = await fetch(url, options);
 
@@ -146,8 +151,10 @@ export const getBookMarks = async function (
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        },
+        },        
       };
+
+      console.log("Fetch options:", options);
 
       const response = await fetch(url, options);
 
