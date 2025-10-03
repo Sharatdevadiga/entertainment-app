@@ -27,25 +27,19 @@ await connectDB();
 // middlewares
 const app = express();
 app.use(express.json());
+
+// CORS - allow all origins
+const corsOptions = {
+  origin: true, // Allow all origins
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie', 'X-Requested-With'],
+  exposedHeaders: ['Set-Cookie'],
+  optionsSuccessStatus: 200 // Some legacy browsers choke on 204
+};
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
-
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://entertainment-app-sandy.vercel.app",
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.includes(origin) || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
 
 // Route middlewares
 app.use("/api/user", authRouter);
@@ -62,6 +56,9 @@ app.use(glbalErrorHandler);
 
 //start the server
 const port = process.env.PORT || 3000;
+
+// Start HTTP server (we'll use Cloudflare for SSL)
 app.listen(port, () => {
-  console.log("✅ Server started successfully");
+  console.log(`✅ Server started successfully on port ${port}`);
+  console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
